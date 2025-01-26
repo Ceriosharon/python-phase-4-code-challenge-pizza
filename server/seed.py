@@ -29,10 +29,13 @@ with app.app_context():
 
     print("Creating RestaurantPizza...")
 
-    pr1 = RestaurantPizza(restaurant=shack, pizza=cheese, price=1)
-    pr2 = RestaurantPizza(restaurant=bistro, pizza=pepperoni, price=4)
-    pr3 = RestaurantPizza(restaurant=palace, pizza=california, price=5)
+    # Using pizza.id and restaurant.id instead of the whole objects
+    pr1 = RestaurantPizza(price=1, pizza_id=cheese.id, restaurant_id=shack.id)
+    pr2 = RestaurantPizza(price=4, pizza_id=pepperoni.id, restaurant_id=bistro.id)
+    pr3 = RestaurantPizza(price=5, pizza_id=california.id, restaurant_id=palace.id)
     restaurantPizzas = [pr1, pr2, pr3]
+
+    # Add all the objects to the session and commit
     db.session.add_all(restaurants)
     db.session.add_all(pizzas)
     db.session.add_all(restaurantPizzas)
